@@ -1,0 +1,14 @@
+machine:
+  node:
+    version: 0.10.36
+
+dependencies:
+  cache_directories:
+    - /tmp/reaction-packages
+  pre:
+    - meteor update || curl https://install.meteor.com | /bin/sh
+    - ./bin/clone-packages.sh
+
+test:
+  override:
+    - VELOCITY_TEST_PACKAGES=1 meteor test-packages --driver-package velocity:html-reporter --velocity --release velocity:METEOR@1.1.0.2_3
